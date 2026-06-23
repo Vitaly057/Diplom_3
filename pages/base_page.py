@@ -15,6 +15,12 @@ class BasePage:
     def get_current_url(self):
         return self.driver.current_url
 
+    def url_matches(self, url):
+        current = self.get_current_url().rstrip('/')
+        if isinstance(url, (list, tuple, set)):
+            return current in {item.rstrip('/') for item in url}
+        return current == url.rstrip('/')
+
     def format_locators(self, locator, value):
         method, selector = locator
         return method, selector.format(value)

@@ -3,6 +3,7 @@ from data import FILLING
 from pages.constructor_page import ConstructorPage
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
+from urls import BASE_URL, FEED_URL
 @allure.feature('Основной функционал')
 class TestMainFunctionality:
 
@@ -15,6 +16,7 @@ class TestMainFunctionality:
         main_page.click_constructor_button()
 
         assert main_page.is_constructor_page_opened()
+        assert main_page.url_matches(BASE_URL)
         assert constructor_page.is_constructor_visible()
 
     @allure.title('Переход по клику на «Лента заказов»')
@@ -25,6 +27,7 @@ class TestMainFunctionality:
         main_page.click_feed_button()
 
         assert main_page.is_feed_page_opened()
+        assert main_page.url_matches(FEED_URL)
         assert order_feed_page.is_feed_page_visible()
 
     @allure.title('При клике на ингредиент появляется всплывающее окно с деталями')
